@@ -1,0 +1,8 @@
+{% extends 'master.html' %}
+{% block content %}
+  {% if tracks %}
+    {% include 'tracks/ttable.html' with tracks=tracks %}
+  {% else %}
+    <p class="d-flex justify-content-center p-3">No tracks added yet.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'master.html' %}
+{% block content %}
+  <form action="{% url 'search' %}" method="post" class="d-flex justify-content-center p-3">
+    {% csrf_token %}
+    <fieldset>
+      <input type="text" name="search_text" id="search">
+    </fieldset>
+    <input type="submit" value="Search">
+  </form>
+
+  {% if tracks %}
+    {% include 'tracks/ttable.html' with tracks=tracks create=true %}
+  {% endif %}
+{% endblock %}

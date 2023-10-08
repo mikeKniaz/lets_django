@@ -1,0 +1,28 @@
+<div class="row">
+  {% for track in tracks %}
+    <div class="col-md-4">
+      <div class="card">
+        <img src="{{ track.image_url}}" class="card-img-top" alt="Album cover">
+        <div class="card-body">
+          <h5 class="card-title">{{ track.name }}</h5>
+          <p class="card-text">{{ track.artist }}</p>
+          {% if request.path == '/the_first/search' %}
+            <form name="create_track" method="post" action="{% url 'create' %}">
+              {% csrf_token %}
+              <input type="hidden" name="spotify_id" value="{{track.spotify_id}}" />
+              <input type="hidden" name="name" value="{{track.name}}" />
+              <input type="hidden" name="artist" value="{{track.artist}}" />
+              <input type="hidden" name="image_url" value="{{track.image_url}}" />
+              <input type="submit" value="Create " class="btn btn-success"/>
+            </form>
+          {% elif request.path == '/the_first/' %}
+            <form name="create_track" method="post" action="{% url 'delete' track.id %}">
+              {% csrf_token %}
+              <input type="submit" value="Delete " class="btn btn-danger"/>
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div> 
+  {% endfor %}
+</div>
